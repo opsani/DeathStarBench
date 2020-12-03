@@ -8,7 +8,7 @@ metadata:
     app-name: jaeger
   namespace: social-network
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 16686
   selector:
