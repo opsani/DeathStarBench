@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: write-home-timeline-service
-        image: harppdx/social-network-microservices
+        image: bburdick/social-network-microservices
         command: ["WriteHomeTimelineService"]
         volumeMounts:
           - mountPath: /social-network-microservices/config/jaeger-config.yml

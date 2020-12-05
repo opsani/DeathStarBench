@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: post-storage-service
-        image: harppdx/social-network-microservices
+        image: bburdick/social-network-microservices
         command: ["PostStorageService"]
         ports: 
         - containerPort: 9090

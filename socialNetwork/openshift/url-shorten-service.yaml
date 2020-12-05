@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: url-shorten-service
-        image: harppdx/social-network-microservices
+        image: bburdick/social-network-microservices
         command: ["UrlShortenService"]
         volumeMounts:
           - mountPath: /social-network-microservices/config/jaeger-config.yml

@@ -11,7 +11,7 @@ ARG LIB_CPP_REDIS_VERSION=4.3.1
 ARG LIB_AMQP_CPP_VERSION=4.1.4
 ARG LIB_SIMPLEAMQPCLIENT_VERSION=2.4.0
 
-ARG NUM_CPUS=40
+#ARG NUM_CPUS=8
 ARG BUILD_DEPS="ca-certificates g++ cmake wget git libmemcached-dev automake bison flex libboost-all-dev libevent-dev libssl-dev libtool make pkg-config librabbitmq-dev"
 
 RUN apt-get update \
@@ -24,7 +24,7 @@ RUN apt-get update \
   && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=0 -DENABLE_EXAMPLES=0 .. \
-  && make -j${NUM_CPUS} \
+  && make \
   && make install \
   && cd /tmp \
   # Install lib-thrift
@@ -34,7 +34,7 @@ RUN apt-get update \
   && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=0 .. \
-  && make -j${NUM_CPUS} \
+  && make \
   && make install \
   && cd /tmp \
   # Install /nlohmann/json
@@ -44,7 +44,7 @@ RUN apt-get update \
   && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=0 .. \
-  && make -j${NUM_CPUS} \
+  && make  \
   && make install \
   && cd /tmp \
   # Install yaml-cpp
@@ -54,7 +54,7 @@ RUN apt-get update \
   && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-fPIC" -DYAML_CPP_BUILD_TESTS=0 .. \
-  && make -j${NUM_CPUS} \
+  && make  \
   && make install \
   && cd /tmp \
   # Install opentracing-cpp
@@ -64,7 +64,7 @@ RUN apt-get update \
   && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-fPIC" -DBUILD_TESTING=0 .. \
-  && make -j${NUM_CPUS} \
+  && make  \
   && make install \
   && cd /tmp \
   # Install jaeger-client-cpp
@@ -74,7 +74,7 @@ RUN apt-get update \
   && mkdir -p cmake-build \
   && cd cmake-build \
   && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-fPIC" -DHUNTER_ENABLED=0 -DBUILD_TESTING=0 -DJAEGERTRACING_WITH_YAML_CPP=1 -DJAEGERTRACING_BUILD_EXAMPLES=0 .. \
-  && make -j${NUM_CPUS} \
+  && make  \
   && make install \
   && cd /tmp \
   # Install jwt
@@ -92,7 +92,7 @@ RUN apt-get update \
   && git submodule init && git submodule update \
   && mkdir cmake-build && cd cmake-build \
   && cmake .. -DCMAKE_BUILD_TYPE=Release \
-  && make -j${NUM_CPUS} \
+  && make  \
   && make install \
   # Install AMQP-CPP
   && cd /tmp \
@@ -100,7 +100,7 @@ RUN apt-get update \
   && cd AMQP-CPP && git checkout v${LIB_AMQP_CPP_VERSION} \
   && mkdir cmake-build && cd cmake-build \
   && cmake .. -DCMAKE_BUILD_TYPE=Release -DAMQP-CPP_BUILD_SHARED=on -DAMQP-CPP_LINUX_TCP=on \
-  && make -j${NUM_CPUS} && make install \
+  && make  && make install \
   # Install SimpleAmqpClient
   && cd /tmp \
   && git clone https://github.com/alanxz/SimpleAmqpClient.git \
@@ -108,7 +108,7 @@ RUN apt-get update \
   && git checkout v${LIB_SIMPLEAMQPCLIENT_VERSION} \
   && mkdir cmake-build && cd cmake-build \
   && cmake .. -DCMAKE_BUILD_TYPE=Release \
-  && make -j${NUM_CPUS} \
+  && make  \
   && make install \
   && cd /tmp \
   && rm -rf \

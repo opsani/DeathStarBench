@@ -68,7 +68,7 @@ if __name__ == '__main__':
     nodes = getNodes(file)
     edges = getEdges(file)
 
-  addr = "http://127.0.0.1:8080"
+  addr = 'http://ab1a72c2f32674fad9cfef2dcf1c72bf-784023250.us-west-2.elb.amazonaws.com:8080'
   loop = asyncio.get_event_loop()
   future = asyncio.ensure_future(register(addr, nodes))
   loop.run_until_complete(future)

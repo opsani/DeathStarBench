@@ -24,8 +24,8 @@ CONFIG_MAPS = {
 }
 
 def create_config_maps(config_maps):
+  os.system('kubectl create namespace social-network')
   for name, file in config_maps.items():
-    os.system('kubectl create namespace social-network')
     os.system('kubectl create configmap {} --from-file={} --namespace social-network'.format(name,file))
 
 if __name__ == '__main__':
